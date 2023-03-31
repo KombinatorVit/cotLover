@@ -1,7 +1,7 @@
 import React from 'react';
 import {useRandomCatData} from "../api/use-random-cat-data.hook";
 import CatCard from "../components/cat-card.component";
-import Button from "../components/button.components";
+import Button from "../components/button.component";
 
 interface HomePageProps {
 }
@@ -17,7 +17,7 @@ const HomePage = ({}) => {
     if (!data) return <div> Noy Cats:((</div>
     return (
         <div className={'p-8'}>
-            <div className={'flex flex-wrap gap-8 justify-center'}>
+            <div className={'flex flex-wrap gap-8 justify-center mb-8'}>
                 {
                     data.pages.map(page => {
                         return page.map(item => (
@@ -30,8 +30,9 @@ const HomePage = ({}) => {
                 }
 
             </div>
-            <Button isLoading={isFetchingNextPage} onClick={() => fetchNextPage()}> Load more</Button>
-
+            <div className={'text-center'}><Button isLoading={isFetchingNextPage} onClick={() => fetchNextPage()}> Load
+                more</Button>
+            </div>
         </div>)
 
 };
