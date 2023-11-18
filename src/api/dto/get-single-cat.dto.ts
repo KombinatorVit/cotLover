@@ -1,17 +1,11 @@
-export type GetRandomCatsDto = Cats[];
+export type GetSingleCatDto = Cat;
 
-interface Cats {
-    breeds: Breed[];
-    categories?: Category[];
+interface Cat {
     id: string;
     url: string;
+    breeds?: Breed[];
     width: number;
     height: number;
-}
-
-interface Category {
-    id: number;
-    name: string;
 }
 
 interface Breed {

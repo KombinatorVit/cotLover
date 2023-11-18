@@ -21,7 +21,7 @@ const HomePage = ({}) => {
                 {
                     data.pages.map(page => {
                         return page.map(item => (
-                                <CatCard key={item.id} image={item.url}
+                                <CatCard key={item.id} image={item.url} catId={item.id}
                                          name={item.breeds?.map((el) => el.name).join(',') || 'Myrrr Cots Name'}/>
 
                             )

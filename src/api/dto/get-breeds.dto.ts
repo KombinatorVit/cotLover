@@ -1,26 +1,12 @@
-export type GetRandomCatsDto = Cats[];
-
-interface Cats {
-    breeds: Breed[];
-    categories?: Category[];
-    id: string;
-    url: string;
-    width: number;
-    height: number;
-}
-
-interface Category {
-    id: number;
-    name: string;
-}
+export type GetBreedsDto = Breed[];
 
 interface Breed {
     weight: Weight;
     id: string;
     name: string;
-    cfa_url: string;
-    vetstreet_url: string;
-    vcahospitals_url: string;
+    cfa_url?: string;
+    vetstreet_url?: string;
+    vcahospitals_url?: string;
     temperament: string;
     origin: string;
     country_codes: string;
@@ -28,8 +14,8 @@ interface Breed {
     description: string;
     life_span: string;
     indoor: number;
-    lap: number;
-    alt_names: string;
+    lap?: number;
+    alt_names?: string;
     adaptability: number;
     affection_level: number;
     child_friendly: number;
@@ -49,9 +35,11 @@ interface Breed {
     rex: number;
     suppressed_tail: number;
     short_legs: number;
-    wikipedia_url: string;
+    wikipedia_url?: string;
     hypoallergenic: number;
-    reference_image_id: string;
+    reference_image_id?: string;
+    cat_friendly?: number;
+    bidability?: number;
 }
 
 interface Weight {

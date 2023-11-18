@@ -24,3 +24,6 @@ export const useRandomCatData = () => {
     return {data, isLoading, isError, fetchNextPage,isFetchingNextPage}
 };
 
+
+
+

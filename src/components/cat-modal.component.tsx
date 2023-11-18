@@ -1,42 +1,47 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Button from "./button.component";
 import {Modal} from "flowbite-react";
+import {useSearchParams} from "react-router-dom";
+import {useSingleCatsData} from "../api/use-single-cat-data-hook";
 
 interface CatModalProps {
 
 }
 
 export const CatModal: FC<CatModalProps> = () => {
-    // const [show, setShow] = useState(false)
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [isOpen, setIsOpen] = useState(false);
+
+
+    const cat = searchParams.get('cat')
+
+    useEffect(() => {
+
+        setIsOpen(!!cat)
+
+    }, [cat])
+
+    const {data, isLoading} = useSingleCatsData({id: cat})
+
+
+    const closeModel = () => setSearchParams({})
 
     return (
 
 
         <>
-            <Button onClick={() => {
-            }}>
-                Toggle modal
-            </Button>
+
             <Modal
-                show={false}
-                onClose={() => {
-                }}>
+                show={isOpen}
+                onClose={closeModel}>
                 <Modal.Header>
-                    Terms of Service
+                    {isLoading
+                        ? 'Loading...'
+                        : data?.breeds?.map((b) => b.name).join(',') || 'Cute kitty'}
                 </Modal.Header>
                 <Modal.Body>
                     <div className="space-y-6">
-                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                            With less than a month to go before the European Union enacts new consumer privacy laws for
-                            its citizens, companies around the world are updating their terms of service agreements to
-                            comply.
-                        </p>
-                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                            The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May
-                            25 and is meant to ensure a common set of data rights in the European Union. It requires
-                            organizations to notify users as soon as possible of high-risk data breaches that could
-                            personally affect them.
-                        </p>
+                        <img src={data?.url} alt=""/>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
@@ -46,8 +51,7 @@ export const CatModal: FC<CatModalProps> = () => {
                     </Button>
                     <Button
                         color="gray"
-                        onClick={() => {
-                        }}
+                        onClick={closeModel}
                     >
                         Decline
                     </Button>
@@ -59,4 +63,6 @@ export const CatModal: FC<CatModalProps> = () => {
 
     );
 }
+
+
 
